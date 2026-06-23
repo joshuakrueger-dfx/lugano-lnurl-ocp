@@ -127,8 +127,8 @@ amount and fails *only* on `description_hash`.
 2. The server still wrote the invoice, so it chose who actually gets paid, and it sees who paid
    what, when. What did Lightning's "no intermediaries" promise just quietly lose?
 
-## Part 4: OpenCryptoPay, same pattern, bigger trust surface (8 min)
-**Goal:** extend your own server to multi-asset, then find what the protocol does *not* protect.
+## Part 4: OpenCryptoPay, the same pattern at scale (8 min)
+**Goal:** extend your own server to multi-asset, then meet the open frontier worth building on.
 
 OCP is your `payRequest`, generalised: instead of one Lightning invoice, the server offers a *menu*
 of assets across chains. Your merchant already knows how. Flip one flag and look:
@@ -156,8 +156,9 @@ curl -s http://127.0.0.1:8088/lnurl/pay | python3 -m json.tool   # the server ju
 
 **Checkpoint:** the `payRequest` now carries `transferAmounts`, and after you edit a number the
 output changes with no complaint from anything. Part 3's hash protected the *description*. Across
-assets and chains there is **no single hash** tying the rate to anything. More convenience, more to
-trust. Bring this to the Red Team.
+assets and chains there is **no single hash** tying the rate together yet. Today the operator quotes
+it, like any exchange. Binding it trustlessly is the open frontier, and a great thing to build.
+Bring it to the Red Team.
 
 ---
 

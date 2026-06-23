@@ -40,10 +40,10 @@ Because an LNURL hides a domain (bech32), and because people scan QR codes witho
 question "who actually owns this domain?" matters. Good wallets show the domain before the action.
 For auth it is even required.
 
-## OpenCryptoPay: the same pattern, a bigger trust surface
+## OpenCryptoPay: the same pattern at scale
 
 OpenCryptoPay (OCP) is LNURL-pay's `payRequest` generalised. Instead of one Lightning invoice, the
-server returns a menu of assets across chains:
+server offers a menu of assets across chains:
 
 ```json
 {
@@ -58,23 +58,31 @@ server returns a menu of assets across chains:
 ```
 
 A plain Lightning wallet ignores the rest and takes the Lightning path (backward compatible on
-purpose). But look at everything you are now trusting the server to assert: the exchange rate, which
-assets are real, which chain settles, the fee. In Part 3 of the lab the hash bound the description.
-**What binds the rate?** Across chains there is no single hash tying it together. That is the open
-frontier, and a good thing to argue about.
+purpose). This is what makes a real till checkout work: the buyer pays in the wallet they already
+have, and the hard parts (rate, chain, settlement) are handled server-side so they never see them.
+
+The honest open question is the same one Part 3 raised. The `description_hash` binds the description.
+**What binds the rate?** Today the operator quotes it, the way every exchange quote works, and across
+chains there is no single hash tying it together yet. Binding it trustlessly is the open frontier,
+and exactly the kind of thing this audience could go and build.
 
 ## The honest verdict (and the debate to run)
 
-LNURL is the biggest UX win Lightning ever had. It won for a reason. The hash binding is good
-hygiene, when wallets actually do it. But "self-custodial Bitcoin at the till" is mostly custodial
-and mostly not Bitcoin the asset, and trusting the OCP rate and settlement is unsolved.
+LNURL is the biggest UX win Lightning ever had. It won for a reason, and the hash binding is good
+hygiene when wallets actually do it. OpenCryptoPay carries that win to real checkout: SPAR in
+Switzerland is a live rollout, not a slide.
+
+Be precise rather than breathless. At the till, settlement is custodial and the asset that moves may
+not be BTC. That is a deliberate UX trade, and a good standard names it openly instead of hiding it.
+Binding the rate and settlement trustlessly across chains is still open. That is the frontier, not a
+flaw to apologise for.
 
 Frame it as two honest readings and let people argue both:
 
 - **A useful bridge.** It meets users where they are. Real checkout, real assets, works with old
   wallets. Trust is the price of usable money, and we always paid it: exchanges, custodians, banks.
-- **Re-centralisation.** One operator sets the rate, picks the asset and settlement, holds the money
-  mid-flight, and logs every payer. "Bitcoin payments" where Bitcoin is optional and trust is
-  required.
+- **The honest cost.** You depend on the operator for the rate, the settlement, and the privacy of
+  who paid. A real dependency, the same one every payment rail carries. The bet is that good
+  engineering and the right operator make it worth it.
 
-Both are defensible. The point of the workshop is that you can now tell which is which.
+Both are defensible. The point of the workshop is that you can argue either side on the merits.

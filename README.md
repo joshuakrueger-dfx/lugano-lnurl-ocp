@@ -2,8 +2,8 @@
 
 A hands-on, 90-minute workshop for a technical audience. Build a Lightning payment server in 70
 lines, use it to lie to a wallet, see why the one check that stops the lie lives in the wallet and
-not the blockchain, then decide whether OpenCryptoPay is a useful bridge or re-centralisation with a
-Bitcoin logo on it.
+not the blockchain, then look honestly at OpenCryptoPay: what it solves, what it asks you to trust,
+and the open frontier worth building on.
 
 **Live site:** https://joshuakrueger-dfx.github.io/lugano-lnurl-ocp/
 
