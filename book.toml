@@ -6,6 +6,7 @@ language = "en"
 src = "src"
 
 [output.html]
+additional-css = ["theme/custom.css"]
 default-theme = "navy"
 preferred-dark-theme = "navy"
 git-repository-url = "https://github.com/joshuakrueger-dfx/lugano-lnurl-ocp"

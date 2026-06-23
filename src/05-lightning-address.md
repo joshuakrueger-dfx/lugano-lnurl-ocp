@@ -12,15 +12,10 @@ around LNURL-pay:
 
 That is all it is. No new protocol, no DNS trick, just a fixed convention for where the wallet asks.
 
-```text
-alice@example.com
-        |
-        v
-GET https://example.com/.well-known/lnurlp/alice
-        |
-        v
-{ "tag": "payRequest", "callback": ..., "metadata": ... }   <- ordinary LNURL-pay from here
-```
+<figure class="diagram">
+<img src="./img/lightning-address.svg" alt="alice@example.com is rewritten by the wallet to GET https://example.com/.well-known/lnurlp/alice, which returns an ordinary LNURL-pay payRequest.">
+<figcaption>A Lightning Address is just LNURL-pay with a friendly, dictatable name.</figcaption>
+</figure>
 
 This is why it makes such a good "aha" example: a forbidding bech32 blob turns into something you can
 read out over the phone.

@@ -5,6 +5,11 @@ detail.
 
 The tell that separates them is one question: **who creates the invoice?** Keep it in mind.
 
+<figure class="diagram">
+<img src="./img/pay-vs-withdraw.svg" alt="pay (LUD-06): the server writes the invoice and money flows to the service. withdraw (LUD-03): your wallet writes the invoice and money flows out to you. Same two-round-trip dance, opposite direction.">
+<figcaption>pay and withdraw are the same dance run in opposite directions.</figcaption>
+</figure>
+
 ## LNURL-pay (LUD-06), the important one
 
 **What for:** a static, reusable payment code. A QR at the till, a donation button, a tip link.
@@ -41,6 +46,11 @@ Created once, used any number of times, optionally with a free-choice amount.
 hash of the `metadata` from step 1. The wallet checks that this hash matches. So the server cannot
 quietly change the description in step 4. Step 1 and step 4 are cryptographically bound. That is the
 elegant trick that makes a static code trustworthy.
+
+<figure class="diagram">
+<img src="./img/hash-binding.svg" alt="Honest case: sha256(metadata) equals the invoice description_hash, so the wallet accepts. Swap case: same amount, but the hashes differ, so the wallet rejects. Only the hash binding catches the swap.">
+<figcaption>The hash binding: honest matches, the swap does not, even at the same amount.</figcaption>
+</figure>
 
 > `metadata` is a JSON array of `[mimetype, content]` pairs. `text/plain` is required. Optional ones
 > include `text/long-desc` and `image/png;base64` (a thumbnail up to 512 by 512), so a wallet can

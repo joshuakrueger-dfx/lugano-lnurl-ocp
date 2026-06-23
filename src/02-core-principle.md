@@ -2,6 +2,11 @@
 
 This is the heart of LNURL. Everyone must understand this part. It is two ideas.
 
+<figure class="diagram">
+<img src="./img/anatomy.svg" alt="The six layers inside a Lightning QR: QR code, bech32 text, an https URL, JSON payRequest over HTTP, a bolt11 invoice, and Lightning settlement. Only the bolt11 layer is Bitcoin.">
+<figcaption>Five of six layers are plain web. Only the bolt11 invoice is Bitcoin.</figcaption>
+</figure>
+
 ## A wrapped link
 
 An LNURL is ultimately just an **HTTPS URL**, packed in a special encoding (bech32, the same family
@@ -35,12 +40,10 @@ Almost every LNURL interaction follows the same pattern:
 
 That is it. Everything else is a variation of this "ask what is possible, then do it" dance.
 
-```text
-wallet  --GET the decoded URL------------>  server
-        <-- JSON { tag, callback, ... } --
-wallet  --GET callback?<params>---------->  server
-        <-- result (an invoice, an OK, ...) --
-```
+<figure class="diagram">
+<img src="./img/flow.svg" alt="Two round trips between wallet and server: GET /lnurl/pay returns a payRequest, then GET callback with an amount returns a bolt11 invoice. The Bitcoin invoice appears only in the last reply.">
+<figcaption>LNURL-pay in two round trips. The Bitcoin invoice appears only in the last reply.</figcaption>
+</figure>
 
 ## Two details that always cause confusion
 

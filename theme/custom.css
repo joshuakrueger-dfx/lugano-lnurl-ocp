@@ -1,0 +1,19 @@
+/* Workshop diagrams: senior-designer figure styling */
+.content figure.diagram {
+  margin: 1.8rem auto;
+  text-align: center;
+  max-width: 720px;
+}
+.content figure.diagram img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+.content figure.diagram figcaption {
+  margin-top: .6rem;
+  font-size: .85em;
+  opacity: .7;
+  font-style: italic;
+}
