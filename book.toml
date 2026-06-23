@@ -1,0 +1,19 @@
+[book]
+title = "LNURL: the most important Bitcoin protocol that isn't Bitcoin"
+description = "A hands-on workshop: build LNURL, break it, and decide if it should exist."
+authors = ["Joshua Krueger"]
+language = "en"
+src = "src"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/joshuakrueger-dfx/lugano-lnurl-ocp"
+edit-url-template = "https://github.com/joshuakrueger-dfx/lugano-lnurl-ocp/edit/main/{path}"
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.search]
+enable = true
