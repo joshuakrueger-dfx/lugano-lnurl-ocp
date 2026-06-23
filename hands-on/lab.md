@@ -1,7 +1,8 @@
 # Hands-on lab: LNURL is just HTTP. Prove it, then break it
 
 Tech track. No pip, no Node, no Bitcoin node. Python 3 only. Two files:
-`lnurl_merchant.py`, `lnurl_client.py`. Work in pairs.
+`lnurl_merchant.py`, `lnurl_client.py`. Work on your own. Team up with a neighbour if you want, but
+everyone should get their own hands on the keys and solve it themselves.
 
 > Thesis you are about to verify with your own hands: **the discovery layer of every Lightning
 > payment you have ever made contains no Bitcoin at all. It is an HTTP request to a server you trust.**
@@ -87,7 +88,8 @@ starting with `lnbc`. You changed the metadata and saw the output change.
 You decide what the screen says. So what stops you from showing "Coffee, 21 sats" and taking more?
 You will run two attacks, one obvious and one not.
 
-> **Predict first (do this before running anything).** With your pair, write down your guess: for
+> **Predict first (do this before running anything).** On your own (compare with a neighbour if you
+> like), write down your guess: for
 > each attack below, *which* of the two checks will catch it, amount or `description_hash`? Then run
 > it and see if you were right. The surprise is the point.
 
@@ -121,7 +123,7 @@ Open `lnurl_client.py` and find the two lines that catch the two attacks:
 **Checkpoint:** honest run prints `PASS`; `--spoof` fails on the amount; `--spoof swap` passes the
 amount and fails *only* on `description_hash`.
 
-**Discuss in your pair:**
+**Think it through (compare with a neighbour if you like):**
 1. The protocol *defines* the defence, but it lives in the **client**. What happens if a wallet
    skips the check? (Some have.) Who is liable?
 2. The server still wrote the invoice, so it chose who actually gets paid, and it sees who paid

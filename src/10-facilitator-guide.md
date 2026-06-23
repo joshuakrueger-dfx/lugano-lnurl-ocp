@@ -21,10 +21,12 @@ get hands on keyboards.
 
 ## Keep it interactive without adding slides
 
-- **Predict, then verify.** Before any spoof runs, have pairs write down which check will catch which
-  attack. The surprise is the teaching.
+- **Predict, then verify.** Before any spoof runs, have everyone write down which check will catch
+  which attack (alone, or comparing with a neighbour). The surprise is the teaching.
 - **Show of hands.** "Who has paid with a Lightning QR?" gives you the room and a natural hook.
-- **Pairs.** The attacker part and the red-team debate both run in pairs, not as a lecture.
+- **Solo first, pair optional.** Everyone gets their own hands on the keys and solves the lab
+  themselves. People can team up if they want, and the red-team debate runs alone or in pairs, but
+  the default is each person works it through, not a lecture.
 
 ## Common misconceptions to be ready for
 
