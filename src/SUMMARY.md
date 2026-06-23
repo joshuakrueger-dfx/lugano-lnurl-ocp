@@ -10,13 +10,13 @@
 - [The four sub-protocols](./04-subprotocols.md)
 - [Lightning Address](./05-lightning-address.md)
 - [Extensions worth knowing](./06-extensions.md)
-- [Security, trust, privacy](./07-security.md)
 
 # Do it
 
-- [Hands-on lab](./08-lab.md)
+- [Build a pay function](./do-pay.md)
 - [Try it yourself](./09-try-it.md)
 
-# Teach it
+# Bonus: break it (at home)
 
-- [Facilitator guide](./10-facilitator-guide.md)
+- [Security, trust, privacy](./07-security.md)
+- [The break-it lab](./08-lab.md)

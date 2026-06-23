@@ -4,3 +4,4 @@ book/
 **/.DS_Store
 .playwright-mcp/
 *.pptx
+src/10-facilitator-guide.md

@@ -278,7 +278,7 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
   <div class="slide-content col center">
     <div class="kicker">Lugano Summer School · Tech track · 90 min</div>
     <h1 class="title">LNURL<span class="dim">:</span> the most important<br>Bitcoin protocol that <span class="gradn">isn't Bitcoin</span></h1>
-    <p class="lead mt" style="text-align:center">You have used it a hundred times without knowing its name.<br>Today you build it, break it, and decide if it should exist.</p>
+    <p class="lead mt" style="text-align:center">You have used it a hundred times without knowing its name.<br>Today you build a real Lightning payment, and use it for real.</p>
     <div class="badge mt2">⚡ build · spoof · red&#8202;team</div>
   </div>
 </div>
@@ -339,7 +339,7 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
   <div class="slide-content col" style="justify-content:center;height:100%">
     <h2>The idea behind the next 90 minutes</h2>
     <p class="big mt">The part of Lightning that made it usable is <span class="gradn">pure web tech</span>, and it quietly gave <span class="btc">trust</span> back to a server.</p>
-    <p class="lead mt2">OpenCryptoPay takes the same trick and stretches it to any asset on any chain. By the end you will understand exactly what it solves, what it asks you to trust, and the one open problem worth building on.</p>
+    <p class="lead mt2">OpenCryptoPay takes the same trick and stretches it to any asset on any chain. By the end you will have built a working Lightning payment yourself, and used it for real.</p>
   </div>
 </div>
 
@@ -417,9 +417,9 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
 <div class="slide">
   <span class="beat"><b>00:12</b> · hands&#8209;on · part 0 and 1</span>
   <div class="slide-content col center">
-    <div class="kicker">stop trusting the slides</div>
+    <div class="kicker">slides away, hands on</div>
     <h1 class="title">Now build it.</h1>
-    <p class="lead mt" style="text-align:center">Warm-up: watch me buy the €0.01 test product on dfx.shop, live. Real OpenCryptoPay.<br>Then we take it apart with <code>python3</code> and two files. No libraries.</p>
+    <p class="lead mt" style="text-align:center">Warm-up: watch me buy the €0.01 test product on dfx.shop, live. Real OpenCryptoPay.<br>Then you build a real Lightning payment yourself, in a few lines of <code>python3</code>. No libraries, no files.</p>
     <div style="display:flex;align-items:center;gap:40px;margin-top:38px;flex-wrap:wrap;justify-content:center">
       <figure style="margin:0;text-align:center">
         <div style="width:236px;height:148px;border-radius:16px;background:linear-gradient(135deg,#1b2030,#11141c);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 34px rgba(0,0,0,.4)">
@@ -447,12 +447,14 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
   <span class="beat"><b>00:14</b> · hands&#8209;on · part 1</span>
   <div class="slide-content">
     <h2>"It is only a URL"</h2>
-    <pre class="mt"><span class="c">$ python3 lnurl_client.py lnurl1dp68gurn8ghj7urp0yhx27rpd4cxcefww…</span>
+    <pre class="mt"><span class="c">$ curl -s https://walletofsatoshi.com/.well-known/lnurlp/test</span>
 
-decoded LNURL <span class="hl">==&gt; https://pay.example.swiss/.well-known/lnurlp/coffee</span>
-   <span class="c">(notice: it is just an https URL. there is no Bitcoin in this step.)</span></pre>
-    <p class="lead mt2">The scary <code>lnurl1…</code> string is bech32 wrapping a plain link. The QR is a <span class="net">URL</span>. That is the whole secret.</p>
-    <p class="note mt2">And that path is a <b class="btc">Lightning Address</b>: <code>coffee@host</code> resolves to this very <code>/.well&#8209;known/lnurlp/coffee</code>. Prove it: <code>curl</code> your own server and the same <code>payRequest</code> comes back. <span class="dim">name@host is a label, nothing more.</span></p>
+{ <span class="k">"tag"</span>: <span class="s">"payRequest"</span>,
+  <span class="k">"callback"</span>: <span class="s">"https://…/lnurlp/payreq/…"</span>,
+  <span class="k">"minSendable"</span>: <span class="n">1000</span>, <span class="k">"maxSendable"</span>: <span class="n">100000000</span>,
+  <span class="k">"metadata"</span>: <span class="s">"[[\"text/plain\",\"Pay to test\"]]"</span> }</pre>
+    <p class="lead mt2">A <b class="btc">Lightning Address</b> is just a URL. <code>curl</code> one and a <span class="net">payRequest</span> comes back. No app, no library, no Bitcoin yet. Just HTTP and JSON.</p>
+    <p class="note mt2">Try your own: <code>curl https://walletofsatoshi.com/.well&#8209;known/lnurlp/&lt;any&#8209;name&gt;</code></p>
   </div>
 </div>
 
@@ -460,101 +462,19 @@ decoded LNURL <span class="hl">==&gt; https://pay.example.swiss/.well-known/lnur
 <div class="slide">
   <span class="beat"><b>00:22</b> · hands&#8209;on · part 2</span>
   <div class="slide-content">
-    <h2>Become the merchant</h2>
-    <div class="split">
-      <pre><span class="c"># the WHOLE server side of LNURL-pay</span>
-GET <span class="net">/lnurl/pay</span>
-{
-  <span class="k">"tag"</span>: <span class="s">"payRequest"</span>,
-  <span class="k">"callback"</span>: <span class="s">"http://…/lnurl/callback"</span>,
-  <span class="k">"minSendable"</span>: <span class="n">21000</span>, <span class="c">// msat</span>
-  <span class="k">"maxSendable"</span>: <span class="n">21000</span>,
-  <span class="k">"metadata"</span>: <span class="s">"[[\"text/plain\",\"Coffee…\"]]"</span>
-}</pre>
-      <div class="col gap">
-        <p class="big" style="font-size:clamp(22px,2.6vw,32px)">A 70&#8209;line web server just spoke <span class="gradn">fluent Lightning</span>.</p>
-        <p class="muted">You decide what the wallet screen says. Edit the text, restart, fetch again. <b>You are the source of truth.</b></p>
-        <p class="note" style="font-size:13px">Heads&#8209;up: amounts are <b class="net">msat</b>. 1 sat = 1000 msat, so 21000 means 21 sat.</p>
-        <p class="note">And that should make you nervous.</p>
-      </div>
-    </div>
-  </div>
-</div>
+    <h2>Build a <span class="gradn">pay</span> function</h2>
+    <p class="note" style="margin-bottom:12px">Eight lines you type yourself. Give it a Lightning Address and an amount, it hands back a real invoice.</p>
+    <pre><span class="k">import</span> urllib.request, json
 
-<!-- 11 SHOWN VS SIGNED -->
-<div class="slide">
-  <span class="beat"><b>00:30</b> · hands&#8209;on · part 3</span>
-  <div class="slide-content col center">
-    <h2 style="text-align:center">So what stops you from <span class="bad">lying</span>?</h2>
-    <div class="vs mt2">
-      <div class="vscol ok"><div class="lab">WHAT THE WALLET SHOWS</div><p class="big mt" style="font-size:clamp(20px,2.4vw,30px)">Coffee · 21 sats</p></div>
-      <div class="gate">the only thing in between is a check the wallet runs</div>
-      <div class="vscol bad"><div class="lab">WHAT THE INVOICE SAYS</div><p class="big mt" style="font-size:clamp(20px,2.4vw,30px)">21,000 sats to me</p></div>
-    </div>
-    <p class="note mt2">Two ways to lie: <code>--spoof</code> (wrong amount) and <code>--spoof swap</code> (right amount, wrong thing). Run both.</p>
-  </div>
-</div>
+<span class="k">def</span> <span class="net">pay</span>(address, sats):
+    user, host = address.split(<span class="s">"@"</span>)
+    pr  = json.load(urllib.request.urlopen(<span class="s">f"https://{host}/.well-known/lnurlp/{user}"</span>))
+    inv = json.load(urllib.request.urlopen(pr[<span class="s">"callback"</span>] + <span class="s">f"?amount={sats*1000}"</span>))  <span class="c"># sats -&gt; msat</span>
+    <span class="k">return</span> inv[<span class="s">"pr"</span>]
 
-<!-- 12 ATTACK DETECTED -->
-<div class="slide">
-  <span class="beat"><b>00:33</b> · hands&#8209;on · part 3</span>
-  <div class="slide-content">
-    <h2>The wallet has to catch it</h2>
-    <pre class="mt"><span class="c"># honest merchant</span>
-invoice amount    : <span class="ok">21000 msat</span>   (you agreed to 21000)
-invoice descr.hash: <span class="ok">274eb138…b26ab8</span>
-sha256(metadata)  : <span class="ok">274eb138…b26ab8</span>
-<span class="ok">PASS. the invoice is bound to exactly what you were shown.</span>
-
-<span class="c"># --spoof  (loud lie: wrong amount)</span>
-invoice amount    : <span class="bad">21000000 msat</span>   (you agreed to 21000)
-sha256(metadata)  : 274eb138…b26ab8
-invoice descr.hash: <span class="bad">ae74ec50…7a5daf</span>
-<span class="bad">ATTACK DETECTED.</span> the amount check alone catches this.
-
-<span class="c"># --spoof swap  (subtle lie: right amount, wrong thing)</span>
-invoice amount    : <span class="ok">21000 msat</span>   (you agreed to 21000)  <span class="ok">✓</span>
-sha256(metadata)  : 274eb138…b26ab8
-invoice descr.hash: <span class="bad">6f3266c1…0fbf91ec</span>
-<span class="bad">ATTACK DETECTED.</span> amount is fine, <span class="net">only the hash</span> caught it.</pre>
-  </div>
-</div>
-
-<!-- 13 BINDING COMPARE -->
-<div class="slide">
-  <span class="beat"><b>00:37</b> · key idea</span>
-  <div class="slide-content">
-    <h2>The defence: the <span class="gradn">hash binding</span> (LUD&#8209;06)</h2>
-    <p class="note" style="margin-bottom:16px">The invoice carries a <code>description_hash</code>. A safe wallet checks it equals <code>sha256(metadata)</code>, so the server cannot show one thing and bill another.</p>
-    <div class="bindwrap">
-      <div class="bind safe">
-        <div class="hh">HONEST</div>
-        <div class="brow"><span class="bx">metadata "Coffee, 21 sats"</span><span class="opx">sha256 ==&gt;</span><span class="hx ok">274eb1…b26ab8</span></div>
-        <div class="brow"><span class="bx">invoice.description_hash</span><span class="opx">read ==&gt;</span><span class="hx ok">274eb1…b26ab8</span></div>
-        <div class="verdict ok">✓ equal · safe to pay</div>
-      </div>
-      <div class="bind attack">
-        <div class="hh">SWAP · same 21 sats</div>
-        <div class="brow"><span class="bx">metadata "Coffee, 21 sats"</span><span class="opx">sha256 ==&gt;</span><span class="hx">274eb1…b26ab8</span></div>
-        <div class="brow"><span class="bx">invoice.description_hash</span><span class="opx">read ==&gt;</span><span class="hx bad">6f3266…0fbf91ec</span></div>
-        <div class="verdict bad">✗ different · reject it</div>
-      </div>
-    </div>
-    <p class="note mt2">The price was honest. <b class="net">Only the hash</b> revealed the swap. The rule is in the protocol, but the check runs in the <b class="btc">wallet</b>. The blockchain enforces nothing here. Some wallets have skipped it.</p>
-  </div>
-</div>
-
-<!-- 14 TRUST CREPT BACK -->
-<div class="slide">
-  <span class="beat"><b>00:40</b> · the uncomfortable part</span>
-  <div class="slide-content">
-    <h2>What Bitcoin removed, LNURL quietly <span class="bad">brought back</span></h2>
-    <div class="cards mt" style="grid-template-columns:repeat(3,1fr)">
-      <div class="card"><h3 class="btc">a server</h3><p class="muted">A domain you must reach and trust. It writes the final invoice, so it quietly picks who actually gets paid.</p></div>
-      <div class="card"><h3 class="btc">a watcher</h3><p class="muted">That server sees who pays whom, how much, and when. Privacy is gone.</p></div>
-      <div class="card"><h3 class="btc">an optional guard</h3><p class="muted">The check lives in the wallet. We did not even verify the invoice signature today.</p></div>
-    </div>
-    <p class="note mt2">None of this makes LNURL bad. It makes it a <b>trade</b>: better UX bought with trust. Hold that thought.</p>
+<span class="c">&gt;&gt;&gt;</span> pay(<span class="s">"test@walletofsatoshi.com"</span>, 21)
+<span class="btc">'lnbc210n1p4r40uh...'</span>   <span class="c"># a real bolt11 invoice</span></pre>
+    <p class="note mt2">That is LNURL-pay end to end: resolve the address, ask for an amount, get a <span class="btc">bolt11 invoice</span>. You just built it.</p>
   </div>
 </div>
 
@@ -597,20 +517,6 @@ invoice descr.hash: <span class="bad">6f3266c1…0fbf91ec</span>
   </div>
 </div>
 
-<!-- 18 NEW TRUST SURFACE -->
-<div class="slide">
-  <span class="beat"><b>00:49</b> · the catch</span>
-  <div class="slide-content">
-    <h2>The hash bound the <i>description</i>.<br>What binds the <span class="gradn">price</span>?</h2>
-    <ul class="list mt2">
-      <li><span class="b">?</span> The rate between BTC, USDT, and CHF comes from the operator, like any exchange quote.</li>
-      <li><span class="b">?</span> The operator states which assets are real and which chain settles.</li>
-      <li><span class="b">?</span> Across chains there is no single <code>description_hash</code> tying it together yet.</li>
-    </ul>
-    <p class="note mt2">See it: edit <code>TRANSFER_AMOUNTS</code>, restart, and the quote changes. That is the open frontier, binding the rate trustlessly across chains. Exactly the kind of thing you could build. Bring it to the red team.</p>
-  </div>
-</div>
-
 <!-- 19 SPAR -->
 <div class="slide">
   <span class="beat"><b>00:52</b> · reality check</span>
@@ -626,59 +532,6 @@ invoice descr.hash: <span class="bad">6f3266c1…0fbf91ec</span>
         <p class="muted mt">A fixed QR, settlement in seconds, and the hard parts (rate, chain, risk) handled server&#8209;side so the buyer never sees them. That is the engineering win.</p>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- 20 THE BIG QUESTION -->
-<div class="slide">
-  <span class="beat"><b>00:55</b> · the question</span>
-  <div class="slide-content col center">
-    <h2 style="text-align:center">So which is it?</h2>
-    <div class="row mt2" style="align-items:stretch">
-      <div class="card" style="flex:1;border-color:#1f3a2c"><h3 class="ok">A useful bridge</h3><p class="muted mt">It meets users where they are. Real checkout, real assets, works with old wallets. Trust is the price of usable money, and we always paid it: exchanges, custodians, banks.</p></div>
-      <div class="card" style="flex:1;border-color:#3a3320"><h3 class="btc">The honest cost</h3><p class="muted mt">You trust the operator for the rate, the settlement, and the privacy of who paid. A real dependency, the same one every payment rail carries. The bet: good engineering and the right operator make it worth it.</p></div>
-    </div>
-    <p class="note mt2">You will argue both. Build the strongest version of each.</p>
-  </div>
-</div>
-
-<!-- 21 RED TEAM BRIEF -->
-<div class="slide">
-  <span class="beat"><b>00:58</b> · red team</span>
-  <div class="slide-content col center">
-    <div class="kicker">15 minutes · solo or in pairs</div>
-    <h1 class="title">Break the <span class="gradn">trust model</span></h1>
-    <p class="lead mt" style="text-align:center">Find the strongest attack, or the objection that kills it.<br>One slide of defence each. I will argue your best one, then try to beat it.</p>
-  </div>
-</div>
-
-<!-- 22 RED TEAM DIMENSIONS -->
-<div class="slide">
-  <span class="beat"><b>00:58</b> · red team · pick a lens</span>
-  <div class="slide-content">
-    <h2>Where to attack, pick one</h2>
-    <div class="cards mt" style="grid-template-columns:repeat(3,1fr)">
-      <div class="card"><h3 class="net">client trust</h3><p class="muted">The binding check is optional and client side. Which wallets skip it? Who is liable?</p></div>
-      <div class="card"><h3 class="net">signature gap</h3><p class="muted">We never verified the invoice signature. What does that open up?</p></div>
-      <div class="card"><h3 class="net">privacy</h3><p class="muted">The server logs every payer, amount, and time. Can you de&#8209;anonymise users?</p></div>
-      <div class="card"><h3 class="net">rate trust</h3><p class="muted">The operator quotes the rate. How would you bind it across chains so nobody has to trust it?</p></div>
-      <div class="card"><h3 class="net">settlement</h3><p class="muted">Who holds value between scan and settle, and how would you shrink that window?</p></div>
-      <div class="card"><h3 class="net">login (auth)</h3><p class="muted">Key login tied to a domain. Phishing, replay, reused keys?</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- 23 VERDICT -->
-<div class="slide">
-  <span class="beat"><b>01:16</b> · honest verdict</span>
-  <div class="slide-content">
-    <h2>My honest take <span class="dim">(disagree with me)</span></h2>
-    <ul class="list mt">
-      <li><span class="b ok">real</span> LNURL is the biggest UX win Lightning ever got. It won for a reason.</li>
-      <li><span class="b ok">real</span> The hash binding is good hygiene, when wallets actually do it.</li>
-      <li><span class="b net">precise</span> At the till, settlement is custodial and the asset may not be BTC. A deliberate UX trade, named openly, not hidden.</li>
-      <li><span class="b net">open</span> Binding the OCP rate and settlement trustlessly is still open. That is the frontier <i>you</i> could build on.</li>
-    </ul>
   </div>
 </div>
 
@@ -698,12 +551,13 @@ invoice descr.hash: <span class="bad">6f3266c1…0fbf91ec</span>
   <span class="beat"><b>01:26</b> · take home</span>
   <div class="slide-content">
     <h2>Take it home</h2>
-    <ul class="list mt">
-      <li><span class="b">1</span> Point your own wallet at your <code>--spoof</code> merchant. Does it catch the lie, or would it have paid? Report back.</li>
-      <li><span class="b">2</span> Add a <code>successAction</code> (LUD&#8209;09) with a link. Now it is phishing. Whose job is it to clean that?</li>
-      <li><span class="b">3</span> Design a binding that protects the OCP <b>price</b> the way the hash protects the description.</li>
+    <p class="lead mt">Want to see how this gets <b class="btc">attacked and defended</b>? That is the bonus lesson, <b>Break it</b>, waiting for you on the course site.</p>
+    <ul class="list mt2">
+      <li><span class="b">1</span> Run a tiny merchant and make it lie. See which one check catches it.</li>
+      <li><span class="b">2</span> Turn a payment into a phishing page with one field, and ask whose job it is to stop that.</li>
+      <li><span class="b">3</span> Find what OpenCryptoPay does not yet bind, and design the fix.</li>
     </ul>
-    <p class="note mt2">Files: <code>hands-on/lnurl_merchant.py</code> · <code>lnurl_client.py</code> · <code>lab.md</code></p>
+    <p class="note mt2">All of it, step by step: <b class="net">joshuakrueger&#8209;dfx.github.io/lugano&#8209;lnurl&#8209;ocp</b></p>
   </div>
 </div>
 
