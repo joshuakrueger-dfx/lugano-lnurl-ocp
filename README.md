@@ -12,7 +12,7 @@ and the open frontier worth building on.
 | Path | What it is |
 |------|------------|
 | `src/` | The course, as an mdBook (theory, lab, facilitator guide). Published to the live site. |
-| `hands-on/` | The lab. Pure standard-library Python 3, no pip, no Node, no Bitcoin node. |
+| `hands-on/` | The lab. Pure standard-library Python 3, no pip, no Node, no Bitcoin node. Includes `demo.py` (one-command narrated fallback) and `FALLBACK.md` (Plan B if the room cannot code). |
 | `slides/` | Self-contained offline deck (`index.html`) and speaker script (`presenter.html`, EN and DE). Open by double-click. |
 
 ## Run the lab

@@ -182,6 +182,8 @@ breaking just moved real money. That is the point.
 > trust section. For a few sats in a workshop, it is the right tool. Needs internet.
 
 ## Stuck? (quick fixes)
+- **Rather just watch it run?** `python3 demo.py` plays the whole lab (honest, both attacks, OCP)
+  and narrates it, press Enter between steps. No commands to assemble.
 - **`python3: command not found`**: try `python`. You need version 3.6 or newer.
 - **`Address already in use` on start**: a merchant is already running. Find the old terminal and
   press Ctrl-C, or change `PORT` at the top of `lnurl_merchant.py`.
