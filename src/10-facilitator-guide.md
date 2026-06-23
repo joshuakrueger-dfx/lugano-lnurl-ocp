@@ -18,6 +18,11 @@ get hands on keyboards.
 6. **Lightning Address (section 5)** as "and this is how it becomes human-friendly".
 7. **Security and privacy (section 7)**, so nobody leaves with half-knowledge.
 8. **Hands-on.** Everyone builds a pay server, then breaks it. See the [lab](./08-lab.md).
+9. **Finale: get paid, for real.** Everyone makes a Lightning Address in the browser (coinos.io,
+   about a minute, laptop-only). Then you walk around and pay a few of them real satoshis with
+   OpenCryptoPay, projecting one wallet as it receives. Tie it back: "my wallet just ran the
+   payRequest flow you built, against a real server, and it moved real money." It closes the loop you
+   opened in the warm-up, and it is the moment people remember.
 
 ## Keep it interactive without adding slides
 

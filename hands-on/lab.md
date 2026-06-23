@@ -164,6 +164,23 @@ Bring it to the Red Team.
 
 ---
 
+## Finale: get paid, for real (live)
+**Goal:** receive a real Lightning payment to an address you made in 60 seconds, and watch the exact
+flow you just built move actual money.
+
+1. Open [coinos.io](https://coinos.io) in your browser and sign up. No app, no phone, about a minute.
+2. You now have a **Lightning Address**: `your-name@coinos.io`. That is an LNURL-pay endpoint, the
+   same thing you built today. Put it on your screen (the address, or its QR).
+3. The facilitator walks around and pays a few of you, **real satoshis**, with OpenCryptoPay.
+4. Watch the balance jump. Under the hood, that wallet just ran *your* `payRequest` flow against
+   coinos's server.
+
+**Checkpoint:** real sats land in your coinos wallet. The thing you spent the hour building and
+breaking just moved real money. That is the point.
+
+> coinos is **custodial**: it holds the sats for you. That is the exact trade you discussed in the
+> trust section. For a few sats in a workshop, it is the right tool. Needs internet.
+
 ## Stuck? (quick fixes)
 - **`python3: command not found`**: try `python`. You need version 3.6 or newer.
 - **`Address already in use` on start**: a merchant is already running. Find the old terminal and
