@@ -472,8 +472,8 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
     inv = json.load(urllib.request.urlopen(pr[<span class="s">"callback"</span>] + <span class="s">f"?amount={sats*1000}"</span>))  <span class="c"># sats -&gt; msat</span>
     <span class="k">return</span> inv[<span class="s">"pr"</span>]
 
-<span class="c">&gt;&gt;&gt;</span> pay(<span class="s">"test@walletofsatoshi.com"</span>, 21)
-<span class="btc">'lnbc210n1p4r40uh...'</span>   <span class="c"># a real bolt11 invoice</span></pre>
+print(pay(<span class="s">"test@walletofsatoshi.com"</span>, 21))
+<span class="c"># -&gt; </span><span class="btc">lnbc210n1p4r40uh...</span><span class="c">  (a real bolt11 invoice)</span></pre>
     <p class="note mt2">That is LNURL-pay end to end: resolve the address, ask for an amount, get a <span class="btc">bolt11 invoice</span>. You just built it.</p>
   </div>
 </div>
