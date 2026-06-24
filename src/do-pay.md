@@ -37,7 +37,7 @@ address, ask the callback for an amount, get the invoice you would pay. You just
 
 ## Try it
 
-- Point it at your **own** Lightning Address (make one in seconds at [coinos.io](https://coinos.io)).
+- Point it at your **own** Lightning Address (make one in seconds in Wallet of Satoshi (free app)).
 - Change the amount and watch the invoice change.
 - Want to go further, run a real merchant, attack it, and see how it is defended? That is the bonus
   section, [Security, trust, privacy](./07-security.md) and [the break-it lab](./08-lab.md).

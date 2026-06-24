@@ -165,21 +165,20 @@ Bring it to the Red Team.
 ---
 
 ## Finale: get paid, for real (live)
-**Goal:** receive a real Lightning payment to an address you made in 60 seconds, and watch the exact
+**Goal:** receive a real Lightning payment to a wallet you set up in a minute, and watch the exact
 flow you just built move actual money.
 
-1. Open [coinos.io](https://coinos.io) in your browser and sign up. No app, no phone, about a minute.
-2. You now have a **Lightning Address**: `your-name@coinos.io`. That is an LNURL-pay endpoint, the
-   same thing you built today. Put it on your screen (the address, or its QR).
+1. Install **Wallet of Satoshi** on your phone (free, about a minute; scan the QR on the slide).
+2. Open it. You now have a **Lightning Address**: `your-name@walletofsatoshi.com`. That is an
+   LNURL-pay endpoint, the same thing your `pay()` function talks to. Put it on your screen.
 3. The facilitator walks around and pays a few of you, **real satoshis**, with OpenCryptoPay.
-4. Watch the balance jump. Under the hood, that wallet just ran *your* `payRequest` flow against
-   coinos's server.
+4. Watch the balance jump. Under the hood, that wallet just ran the same `payRequest` flow you built.
 
-**Checkpoint:** real sats land in your coinos wallet. The thing you spent the hour building and
-breaking just moved real money. That is the point.
+**Checkpoint:** real sats land in your wallet. The thing you built today just moved real money. That
+is the point.
 
-> coinos is **custodial**: it holds the sats for you. That is the exact trade you discussed in the
-> trust section. For a few sats in a workshop, it is the right tool. Needs internet.
+> Wallet of Satoshi is **custodial**: it holds the sats for you. That is the trade you read about in
+> the trust section. For a few sats in a workshop, it is the right tool. Needs internet.
 
 ## Stuck? (quick fixes)
 - **Rather just watch it run?** `python3 demo.py` plays the whole lab (honest, both attacks, OCP)
