@@ -16,7 +16,7 @@ Bitcoin yet, just HTTP and JSON. Swap `test` for any name and it still answers.
 
 ## Now build pay()
 
-Type this into a file `pay.py`, or straight into `python3`:
+Save this as a file called `pay.py`:
 
 ```python
 import urllib.request, json
@@ -30,8 +30,26 @@ def pay(address, sats):
 print(pay("test@walletofsatoshi.com", 21))
 ```
 
-Run it. A real bolt11 invoice comes back (`lnbc...`). That is LNURL-pay end to end: resolve the
-address, ask the callback for an amount, get the invoice you would pay. You just built it.
+Then run it from the terminal:
+
+```sh
+python3 pay.py
+```
+
+A real bolt11 invoice comes back (`lnbc...`). That is LNURL-pay end to end: resolve the address, ask
+the callback for an amount, get the invoice you would pay. You just built it.
+
+> **The number-one mistake:** do not paste the Python lines straight into the terminal. The terminal
+> is the shell (zsh), not Python, so it reports `command not found: import`. Put the code in `pay.py`
+> and run `python3 pay.py`, or, if you want a single line to paste, wrap it:
+>
+> ```sh
+> python3 -c 'import urllib.request,json
+> def pay(a,s):
+>  u,h=a.split("@");pr=json.load(urllib.request.urlopen(f"https://{h}/.well-known/lnurlp/{u}"))
+>  return json.load(urllib.request.urlopen(pr["callback"]+f"?amount={s*1000}"))["pr"]
+> print(pay("test@walletofsatoshi.com",21))'
+> ```
 
 > Amounts are in millisatoshi. 1 sat = 1000 msat, which is why the code sends `sats * 1000`.
 
