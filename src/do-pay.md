@@ -16,7 +16,7 @@ Bitcoin yet, just HTTP and JSON. Swap `test` for any name and it still answers.
 
 ## Now build pay()
 
-This is the function. Read it, then run it with **one** of the two foolproof methods below.
+This is the function. Read it, then run it with one of the methods below.
 
 ```python
 import urllib.request, json
@@ -30,8 +30,15 @@ def pay(address, sats):
 print(pay("test@walletofsatoshi.com", 21))
 ```
 
-**Method 1 (recommended): make the file from the terminal, no editor.** Paste this whole block into
-the terminal. It writes a clean `pay.py` and runs it:
+**Easiest (just run it): download and run.** Two single-line commands, nothing to paste or type:
+
+```sh
+curl -O https://raw.githubusercontent.com/joshuakrueger-dfx/lugano-lnurl-ocp/main/hands-on/pay.py
+python3 pay.py
+```
+
+**Method 1 (type it yourself): make the file from the terminal, no editor.** Paste this whole block
+into the terminal. It writes a clean `pay.py` and runs it:
 
 ```sh
 cat > pay.py <<'EOF'
