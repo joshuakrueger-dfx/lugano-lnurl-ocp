@@ -90,7 +90,7 @@ You will run two attacks, one obvious and one not.
 
 > **Predict first (do this before running anything).** On your own (compare with a neighbour if you
 > like), write down your guess: for
-> each attack below, *which* of the two checks will catch it, amount or `description_hash`? Then run
+> each attack below, *which* check would catch it, amount, `description_hash`, or both? Then run
 > it and see if you were right. The surprise is the point.
 
 **Attack 1, the loud lie (wrong amount).**
@@ -101,8 +101,10 @@ python3 lnurl_merchant.py --spoof          # shows coffee, invoices 1000x the am
 python3 lnurl_client.py http://127.0.0.1:8088/lnurl/pay
 ```
 
-`ATTACK DETECTED`. The invoice is for 21000000 msat, you agreed to 21000. The **amount check**
-caught it. Easy. But amount is the obvious lever; a careful attacker keeps the price *identical*.
+`ATTACK DETECTED`, and here **both** checks fire: the invoice is for 21000000 msat (you agreed to
+21000), and crudely changing the amount broke the hash binding too. The **amount check** alone was
+already enough. Easy. But amount is the obvious lever; a careful attacker keeps the price *identical*
+so the amount check stays silent. That is Attack 2.
 
 **Attack 2, the subtle lie (right amount, wrong thing).**
 

@@ -13,6 +13,7 @@ see that "Lightning" UX is HTTP + JSON + a hash check. Signatures are NOT verifi
 import hashlib
 import json
 import sys
+import urllib.error
 import urllib.request
 
 CHARSET = "qpzry9x8gf2tvdw0s3jn54khce6mua7l"
@@ -90,7 +91,16 @@ def main():
     else:
         url = arg
 
-    req = get(url)
+    try:
+        req = get(url)
+    except (urllib.error.URLError, ConnectionError) as e:
+        print(f"could not reach {url}\n   ({e})\n")
+        print("If you only wanted to see the decode, you are done: an LNURL is just a URL,")
+        print("and this example points at a placeholder domain. To run the full check,")
+        print("start the merchant and point me at it:")
+        print("   python3 lnurl_merchant.py            # in another terminal")
+        print("   python3 lnurl_client.py http://127.0.0.1:8088/lnurl/pay")
+        sys.exit(0)
     assert req.get("tag") == "payRequest", req
     meta = req["metadata"]
     amount = req["minSendable"]
