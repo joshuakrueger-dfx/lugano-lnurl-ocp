@@ -15,7 +15,7 @@ These build on LNURL-pay and explain why LNURL is so widespread today.
 
 - **Nostr zaps.** The "zaps" in the Nostr network are LNURL-pay plus a Nostr extension. A `nostr`
   field carries a signed Nostr event request, and after payment a public "zap receipt" is posted. If
-  your audience knows Nostr, this is a motivating "what is it all for" example.
+  you have seen "zaps" on Nostr, this is LNURL-pay doing the work underneath.
 
 - **verify (LUD-21).** Lets the wallet ask the service for the payment status (paid or open) without
   having to watch the Lightning layer itself.

@@ -1,7 +1,7 @@
 # The four sub-protocols
 
-This is the main content. For each one: what it is for, the flow, and the single most important
-detail.
+These four are the core of LNURL. For each one: what it is for, the flow, and the single most
+important detail.
 
 The tell that separates them is one question: **who creates the invoice?** Keep it in mind.
 
@@ -108,8 +108,8 @@ over "log in with Google".
 
 > The exact derivation (LUD-05, BIP32-based) is optional depth: a `hashingKey` from the master key
 > via `m/138'/0`, then `HMAC-SHA256(hashingKey, domain)`; the first 16 bytes give four 32-bit numbers
-> used to derive the service key under `m/138'/<long1>/<long2>/...`. For a workshop, "one reproducible
-> key per domain" is usually enough.
+> used to derive the service key under `m/138'/<long1>/<long2>/...`. For most purposes, "one reproducible
+> key per domain" is the part to remember.
 
 ## LNURL-channel (LUD-02), ask for a channel
 
@@ -120,10 +120,9 @@ inbound liquidity).
 node). The wallet connects to that node, then calls the callback with `k1`, its own `remoteid` (node
 ID), and `private` (0 or 1). The service then opens the channel.
 
-In practice this is the least used of the four. For a workshop, a short mention that it exists is
-often enough.
+In practice this is the least used of the four; it is enough to know it exists.
 
-## Comparison (good for one slide)
+## Comparison at a glance
 
 | | Who creates the invoice? | Money flow | Typical use |
 |---|---|---|---|

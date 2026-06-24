@@ -1,6 +1,6 @@
 # The core principle
 
-This is the heart of LNURL. Everyone must understand this part. It is two ideas.
+This is the heart of LNURL, and the part to get before anything else. It is two ideas.
 
 <figure class="diagram">
 <img src="./img/anatomy.svg" alt="The six layers inside a Lightning QR: QR code, bech32 text, an https URL, JSON payRequest over HTTP, a bolt11 invoice, and Lightning settlement. Only the bolt11 layer is Bitcoin.">

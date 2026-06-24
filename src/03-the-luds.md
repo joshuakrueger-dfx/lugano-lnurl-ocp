@@ -6,8 +6,8 @@ and so on (LUD means Lightning URL Document), maintained on GitHub under
 it needs. They are deliberately optional and modular, with a loose dependency hierarchy (for
 example, "comments in payRequest" builds on the base payRequest).
 
-This is useful when you teach: you can say cleanly "this feature is LUD-XX" and you never have to
-sell LNURL as one monolithic thing.
+This modularity is useful: you can say cleanly "this feature is LUD-XX", and you never have to treat
+LNURL as one monolithic thing.
 
 The ones worth knowing:
 

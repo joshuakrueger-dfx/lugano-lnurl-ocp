@@ -13,9 +13,9 @@ copied a one-time invoice.
 
 ## Run your own service
 
-[LNbits](https://lnbits.com) is the classic choice for workshops. It has ready-made extensions for
-LNURL-pay links, withdraw and voucher codes, and Lightning Addresses. You can produce a QR in
-minutes that participants scan.
+[LNbits](https://lnbits.com) is the classic choice here. It has ready-made extensions for
+LNURL-pay links, withdraw and voucher codes, and Lightning Addresses. You can produce a scannable QR
+in minutes.
 
 ## Do it by hand (the "aha" moment)
 
@@ -23,7 +23,7 @@ This is the most convincing one, and it is exactly what the [lab](./08-lab.md) d
 dependencies.
 
 Take an LNURL-pay link, decode the bech32 (online decoders exist, or use the `bech32` library or our
-`lnurl_client.py`), and make the `GET` request yourself with `curl`. When people see the raw JSON
+`lnurl_client.py`), and make the `GET` request yourself with `curl`. When you see the raw JSON
 with the `tag` field, the core principle clicks immediately.
 
 ```sh

@@ -204,6 +204,15 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
 .list li .b{color:var(--btc);font-family:'JetBrains Mono',monospace;flex:none}
 .note{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim);line-height:1.5}
 .badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--mut);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.run{margin-top:22px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.run .runhead{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--btc);margin-bottom:12px}
+.run .cmd{display:flex;align-items:center;gap:14px;margin:8px 0;flex-wrap:wrap}
+.run .step{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--mut)}
+.run .mono{font-family:'JetBrains Mono',monospace;font-size:15px;color:#D5D9E6;background:#0E1118;border:1px solid var(--line);border-radius:8px;padding:4px 12px}
+.run .hint{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+.run .key{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--btc);background:#161b29;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px}
+.run .runalt{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+.run .runalt .mono{font-size:12px;padding:2px 8px}
 
 .flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .node{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:13px 16px;font-family:'JetBrains Mono',monospace;font-size:14px}
@@ -463,7 +472,7 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
   <span class="beat"><b>00:22</b> · hands&#8209;on · part 2</span>
   <div class="slide-content">
     <h2>Build a <span class="gradn">pay</span> function</h2>
-    <p class="note" style="margin-bottom:12px">Easiest to run: download it with one <code>curl</code> from the course site, then <code>python3 pay.py</code>. <b class="btc">Typing it yourself? Use <code>cat &gt; pay.py</code> in the terminal, never TextEdit.</b></p>
+    <p class="note" style="margin-bottom:10px">The whole of LNURL&#8209;pay in eight lines. Type exactly this into the file:</p>
     <pre><span class="k">import</span> urllib.request, json
 
 <span class="k">def</span> <span class="net">pay</span>(address, sats):
@@ -472,9 +481,13 @@ pre .k{color:var(--net2)} pre .s{color:#7FD6A6} pre .n{color:var(--btc)} pre .c{
     inv = json.load(urllib.request.urlopen(pr[<span class="s">"callback"</span>] + <span class="s">f"?amount={sats*1000}"</span>))  <span class="c"># sats -&gt; msat</span>
     <span class="k">return</span> inv[<span class="s">"pr"</span>]
 
-print(pay(<span class="s">"test@walletofsatoshi.com"</span>, 21))
-<span class="c"># -&gt; </span><span class="btc">lnbc210n1p4r40uh...</span><span class="c">  (a real bolt11 invoice)</span></pre>
-    <p class="note mt2">That is LNURL-pay end to end: resolve the address, ask for an amount, get a <span class="btc">bolt11 invoice</span>. You just built it.</p>
+print(pay(<span class="s">"test@walletofsatoshi.com"</span>, 21))</pre>
+    <div class="run">
+      <div class="runhead">Run it</div>
+      <div class="cmd"><span class="step">1</span><span class="mono">nano pay.py</span><span class="hint">type the lines above, then save <span class="key">^O</span> <span class="key">&#9166;</span> and exit <span class="key">^X</span></span></div>
+      <div class="cmd"><span class="step">2</span><span class="mono">python3 pay.py</span><span class="hint">&#8594; <span class="btc">lnbc210n1p4r40uh...</span> a real bolt11 invoice</span></div>
+      <div class="runalt">No typing? On the course site, copy <span class="mono">pay.py</span>, then just run <span class="mono">python3 pay.py</span>. <span class="dim">Not TextEdit (saves RTF), not pasted into the shell.</span></div>
+    </div>
   </div>
 </div>
 

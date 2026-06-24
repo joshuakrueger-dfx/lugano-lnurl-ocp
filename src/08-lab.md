@@ -12,7 +12,7 @@ The two files live in
   a Lightning Address. About 70 lines, standard library only.
 - `lnurl_client.py`: a correct wallet. It reads bolt11 with around 40 lines of bech32, no library, so
   you can see that "Lightning" is HTTP plus JSON plus one hash check. Signatures are out of scope and
-  not verified, which is exactly the "signature gap" you discuss in Part 3.
+  not verified, which is exactly the "signature gap" Part 3 of the lab is about.
 
 Clone the repository and run them as the lab describes:
 

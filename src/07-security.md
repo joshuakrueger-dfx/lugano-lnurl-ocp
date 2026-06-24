@@ -1,7 +1,7 @@
 # Security, trust, privacy
 
-This belongs in every serious workshop, otherwise people leave with a false picture of "magically
-safe".
+This part matters as much as the rest. Skip it and it is easy to walk away with a false picture of
+"magically safe".
 
 ## Trust model
 
@@ -32,7 +32,7 @@ As noted, `k1` must be single-use, otherwise a voucher can be double-redeemed.
 ## Privacy in auth
 
 The domain-specific `linkingKey` prevents cross-service tracking. That is a real plus over "log in
-with Google" and a good discussion topic.
+with Google", and worth pausing on.
 
 ## Phishing
 
@@ -64,9 +64,9 @@ have, and the hard parts (rate, chain, settlement) are handled server-side so th
 The honest open question is the same one Part 3 raised. The `description_hash` binds the description.
 **What binds the rate?** Today the operator quotes it, the way every exchange quote works, and across
 chains there is no single hash tying it together yet. Binding it trustlessly is the open frontier,
-and exactly the kind of thing this audience could go and build.
+and exactly the kind of thing worth building.
 
-## The honest verdict (and the debate to run)
+## The honest verdict
 
 LNURL is the biggest UX win Lightning ever had. It won for a reason, and the hash binding is good
 hygiene when wallets actually do it. OpenCryptoPay carries that win to real checkout: SPAR in
@@ -77,7 +77,7 @@ not be BTC. That is a deliberate UX trade, and a good standard names it openly i
 Binding the rate and settlement trustlessly across chains is still open. That is the frontier, not a
 flaw to apologise for.
 
-Frame it as two honest readings and let people argue both:
+There are two honest readings, and both are worth weighing:
 
 - **A useful bridge.** It meets users where they are. Real checkout, real assets, works with old
   wallets. Trust is the price of usable money, and we always paid it: exchanges, custodians, banks.
@@ -85,4 +85,4 @@ Frame it as two honest readings and let people argue both:
   who paid. A real dependency, the same one every payment rail carries. The bet is that good
   engineering and the right operator make it worth it.
 
-Both are defensible. The point of the workshop is that you can argue either side on the merits.
+Both are defensible. The point is that you can argue either side on the merits.

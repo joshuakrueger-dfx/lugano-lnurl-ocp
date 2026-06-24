@@ -17,15 +17,15 @@ LNURL is the answer to all of that. It is **not a new network and not a change t
 a layer of HTTP conventions on top: an agreed format for how a wallet and a server talk to each
 other so these scenarios become comfortable.
 
-> **Workshop one-liner.** Lightning moves the money. LNURL organises the conversation before it:
+> **In one line.** Lightning moves the money. LNURL organises the conversation before it:
 > who asks whom, how, for what amount.
 
-## The hook
+## The tension to hold
 
-Put two QR codes next to each other:
+Picture two QR codes side by side:
 
 - a plain BOLT11 invoice: one use, fixed amount,
 - a Lightning Address or LNURL-pay code: reusable, amount up to the payer.
 
-Ask the room: *why does the second one do something the first one cannot?* Hold that tension. The
-rest of the course is the answer.
+*Why does the second one do something the first one cannot?* Hold that question. The rest of the
+course is the answer.
