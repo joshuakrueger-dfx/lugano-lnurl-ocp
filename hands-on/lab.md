@@ -166,18 +166,27 @@ Bring it to the Red Team.
 
 ---
 
-## Finale: get paid, for real (live)
-**Goal:** receive a real Lightning payment to a wallet you set up in a minute, and watch the exact
-flow you just built move actual money.
+## Finale: first code wins, get paid for real (live)
+**Goal:** show a QR that pays *you* 21 sats. The facilitator scans it and pays, **real satoshis**.
+**First working code gets paid.** How you make that QR is up to you, easy route or hard route.
 
-1. Install **Wallet of Satoshi** on your phone (free, about a minute; scan the QR on the slide).
-2. Open it. You now have a **Lightning Address**: `your-name@walletofsatoshi.com`. That is an
-   LNURL-pay endpoint, the same thing your `pay()` function talks to. Put it on your screen.
-3. The facilitator walks around and pays a few of you, **real satoshis**, with OpenCryptoPay.
-4. Watch the balance jump. Under the hood, that wallet just ran the same `payRequest` flow you built.
+1. Install **Wallet of Satoshi** on your phone (free, about a minute; scan the QR on the slide). It
+   gives you a **Lightning Address**, `your-name@walletofsatoshi.com`, the same kind of LNURL-pay
+   endpoint your `pay()` talks to.
+2. Now produce a **scannable QR that pays you 21 sats**. Pick your level:
+   - **Easy:** in Wallet of Satoshi tap **Receive**, enter 21 sats, show the QR it draws.
+   - **Medium:** point your own `pay("your-name@walletofsatoshi.com", 21)` at *your* address, take
+     the `lnbc...` it prints, and paste it into any QR generator.
+   - **Boss level:** make your `pay.py` output the QR itself (write the invoice into a small HTML
+     page and open it, or render it however you like). Your code, your call.
+3. Hold the code up. The facilitator scans the **first working one** and pays it.
 
-**Checkpoint:** real sats land in your wallet. The thing you built today just moved real money. That
-is the point.
+**Checkpoint:** real sats land in your wallet. The thing you built today just moved real money, and
+the QR that moved it is one you produced. That is the point.
+
+> Any of the three is a *correct* answer. The QR just carries a bolt11 invoice (or your address); the
+> facilitator's wallet runs the exact `payRequest` flow you built to pay it. The easy route teaches
+> you the tool, the boss level teaches you the protocol. Both get paid.
 
 > Wallet of Satoshi is **custodial**: it holds the sats for you. That is the trade you read about in
 > the trust section. For a few sats in a workshop, it is the right tool. Needs internet.

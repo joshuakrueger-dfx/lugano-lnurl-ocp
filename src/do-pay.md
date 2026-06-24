@@ -77,5 +77,8 @@ address, ask the callback for an amount, get the invoice you would pay. You just
 
 - Point it at your **own** Lightning Address (make one in seconds in Wallet of Satoshi (free app)).
 - Change the amount and watch the invoice change.
+- **Finale challenge:** turn the `lnbc...` it prints into a **QR that pays you**, then show it. First
+  working code the facilitator can scan gets paid real sats. Shortcut: Wallet of Satoshi's *Receive*
+  screen. Boss level: make `pay.py` render the QR itself.
 - Want to go further, run a real merchant, attack it, and see how it is defended? That is the bonus
   section, [Security, trust, privacy](./07-security.md) and [the break-it lab](./08-lab.md).
