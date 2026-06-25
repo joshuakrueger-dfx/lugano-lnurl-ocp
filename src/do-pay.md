@@ -16,7 +16,7 @@ Bitcoin yet, just HTTP and JSON. Swap `test` for any name and it still answers.
 
 ## Now build pay()
 
-This is the function. Read it, then run it with one of the methods below.
+This is the function. Type it into a file and run it.
 
 ```python
 import urllib.request, json
@@ -30,15 +30,24 @@ def pay(address, sats):
 print(pay("test@walletofsatoshi.com", 21))
 ```
 
-**Easiest (just run it): download and run.** Two single-line commands, nothing to paste or type:
+**Type it into a file with `nano`.** `nano` runs inside the terminal and saves plain text, so none of
+the traps below can bite you:
 
 ```sh
-curl -O https://raw.githubusercontent.com/joshuakrueger-dfx/lugano-lnurl-ocp/main/hands-on/pay.py
+nano pay.py
+```
+
+Type the function, then **save and exit**: `Ctrl-O`, `Enter`, `Ctrl-X`. (`^O` means hold the Control
+key and press the letter `O`, not `⌘` and not the `^` character.) Then run it:
+
+```sh
 python3 pay.py
 ```
 
-**Method 1 (type it yourself): make the file from the terminal, no editor.** Paste this whole block
-into the terminal. It writes a clean `pay.py` and runs it:
+A real bolt11 invoice comes back (`lnbc...`). That is LNURL-pay end to end: resolve the address, ask
+the callback for an amount, get the invoice you would pay. You just built it.
+
+**Prefer to stay in the terminal?** Two shortcuts that need no editor. Write the file in one paste:
 
 ```sh
 cat > pay.py <<'EOF'
@@ -53,7 +62,7 @@ EOF
 python3 pay.py
 ```
 
-**Method 2: one line, no file.** Paste this single command into the terminal:
+Or run it in one line, no file at all:
 
 ```sh
 python3 -c 'import urllib.request,json
@@ -63,15 +72,22 @@ def pay(a,s):
 print(pay("test@walletofsatoshi.com",21))'
 ```
 
-Either way, a real bolt11 invoice comes back (`lnbc...`). That is LNURL-pay end to end: resolve the
-address, ask the callback for an amount, get the invoice you would pay. You just built it.
-
-> **Two traps to avoid.** (1) Do not paste the Python lines straight into the terminal: the terminal
-> is the shell (zsh), not Python, so it says `command not found: import`. (2) Do not save the file
-> with **TextEdit**: it saves Rich Text (`.rtf`), and Python chokes on `\rtf1`. Use Method 1 above,
-> or in TextEdit choose **Format → Make Plain Text** first.
+> **Traps to avoid, all four are about how the text lands in the file, not about LNURL.**
+> 1. Do not paste the Python straight into the terminal: the terminal is the shell (zsh), not Python,
+>    so it says `command not found: import`.
+> 2. Do not save with **TextEdit**: it saves Rich Text (`.rtf`) and Python chokes on `\rtf1`. `nano`
+>    avoids this; if you must use TextEdit, choose **Format → Make Plain Text** first.
+> 3. In `nano`, `^O` is **Control + O**, not `⌘` and not the `^` key. If you get stuck, press
+>    `Ctrl-X`, then `Y`, then `Enter`, which saves and quits in one go.
+> 4. Indent with **only spaces, never mix tabs and spaces**, or Python throws `TabError`. If you
+>    already mixed them, normalise the file:
+>    `python3 -c "open('pay.py','w').write(open('pay.py').read().expandtabs(4))"`.
 
 > Amounts are in millisatoshi. 1 sat = 1000 msat, which is why the code sends `sats * 1000`.
+
+> **No terminal at all?** As a last resort, grab the finished file with
+> `curl -O https://raw.githubusercontent.com/joshuakrueger-dfx/lugano-lnurl-ocp/main/hands-on/pay.py`
+> then `python3 pay.py`. But typing it yourself is the point.
 
 ## Try it
 
