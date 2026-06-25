@@ -89,6 +89,35 @@ print(pay("test@walletofsatoshi.com",21))'
 > `curl -O https://raw.githubusercontent.com/joshuakrueger-dfx/lugano-lnurl-ocp/main/hands-on/pay.py`
 > then `python3 pay.py`. But typing it yourself is the point.
 
+## One QR, paid again and again
+
+The `lnbc...` you just made is a **one-time** invoice: one fixed amount, it expires, you pay it once
+and it is spent. So what is the QR taped to a shop wall that takes payment after payment? A different
+thing entirely. It encodes a **Lightning Address / LNURL**, not an invoice.
+
+Here is the part that surprises everyone: **you do not write any code for that, and you do not put new
+invoices on the QR.** The static QR carries your **address**, not a payment. When someone pays you,
+*their* wallet runs the exact `pay()` flow above against your address, and the server (Wallet of
+Satoshi, in this case) **mints a fresh invoice on the spot**. Same address, a brand new invoice every
+single scan. The payer's wallet and the server do all the work.
+
+```
+static QR (your address)  ->  payer scans  ->  their wallet GETs your callback
+                          ->  server mints a NEW lnbc... invoice  ->  paid
+        (the QR never changes; the invoice is different every time)
+```
+
+- Encode your address **once** and reuse it forever. `you@walletofsatoshi.com` turned into an
+  `lnurl1...` QR is the reusable "pay me" sign. (Your address as bech32 is all the QR holds.)
+- Tip: many wallets open it more reliably with a `lightning:` prefix, e.g. `lightning:LNURL1DP68...`.
+  Wallet of Satoshi also shows this static QR for you in the app, so you rarely have to build it.
+- You only write invoice-minting code if **you are the server**. That is exactly what
+  `lnurl_merchant.py` does in the [bonus lab](./08-lab.md), and what OpenCryptoPay runs for real shops
+  (the same static endpoint, generalised to many assets and chains).
+
+**One-time = `lnbc...` (invoice). Reusable = `lnurl1...` / Lightning Address.** For a static "again and
+again" QR, you encode the address, never the invoice.
+
 ## Try it
 
 - Point it at your **own** Lightning Address (make one in seconds in Wallet of Satoshi (free app)).
